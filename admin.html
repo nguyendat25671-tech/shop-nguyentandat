@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Hạt Hương Việt</title>
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <div class="admin-container">
+
+    <h1>Trang Quản Trị Sản Phẩm</h1>
+
+    <!-- FORM -->
+
+    <div class="admin-form">
+
+      <input type="text" id="name" placeholder="Tên sản phẩm">
+
+      <input type="number" id="price" placeholder="Giá sản phẩm">
+
+      <input type="text" id="image" placeholder="Link hình ảnh">
+
+      <button onclick="addProduct()">
+        Thêm sản phẩm
+      </button>
+
+    </div>
+
+    <!-- DANH SÁCH -->
+
+    <div id="adminProducts"></div>
+
+  </div>
+
+  <script src="admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#f4f4f4;
+  padding:40px;
+}
+
+.admin-container{
+  max-width:1000px;
+  margin:auto;
+}
+
+h1{
+  margin-bottom:30px;
+  color:#1f3f6d;
+}
+
+.admin-form{
+  display:flex;
+  gap:10px;
+  margin-bottom:30px;
+}
+
+.admin-form input{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+}
+
+.admin-form button{
+  padding:12px 20px;
+  border:none;
+  background:#ff914d;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.admin-product{
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.admin-product img{
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.product-info{
+  flex:1;
+  margin-left:20px;
+}
+
+.delete-btn{
+  background:red;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+}
+body{
+  font-family: Arial;
+  background:#f4f4f4;
+  padding:40px;
+}
+
+.admin-container{
+  max-width:900px;
+  margin:auto;
+}
+
+h1{
+  margin-bottom:30px;
+}
+
+.admin-form{
+  display:flex;
+  gap:10px;
+  margin-bottom:30px;
+}
+
+.admin-form input{
+  flex:1;
+  padding:12px;
+}
+
+.admin-form button{
+  padding:12px 20px;
+  border:none;
+  background:#1e3a5f;
+  color:white;
+  cursor:pointer;
+}
+
+.admin-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.admin-card img{
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.admin-card button{
+  background:red;
+  color:white;
+  border:none;
+  padding:10px;
+  cursor:pointer;
+}

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>SHOP NGUYỄN TẤN ĐẠT</title>
+
+  <link rel="icon" href="anh1.jpg">
+
+  <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="logo">
+      SHOP NGUYỄN TẤN ĐẠT
+    </div>
+
+    <!-- MOBILE MENU BUTTON -->
+
+    <button
+      class="menu-toggle"
+      onclick="toggleMenu()">
+
+      ☰
+
+    </button>
+
+    <nav id="navbar">
+
+      <a href="#">
+        Trang Chủ
+      </a>
+
+      <a href="#products">
+        Sản Phẩm
+      </a>
+
+      <a href="#about">
+        Giới Thiệu
+      </a>
+
+      <a href="#footer">
+        Liên Hệ
+      </a>
+
+    </nav>
+
+    <div class="header-right">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Tìm sản phẩm..."
+        class="search-box"
+      >
+
+      <button
+        onclick="toggleDarkMode()"
+        class="admin-btn">
+
+        🌙
+
+      </button>
+
+      <button
+        class="admin-btn"
+        onclick="adminLogin()">
+
+        Admin
+
+      </button>
+
+      <button
+        class="admin-btn"
+        onclick="logoutAdmin()">
+
+        Logout
+
+      </button>
+
+      <div
+  class="cart-btn"
+  onclick="openCart()">
+
+  🛒 Giỏ Hàng
+  (<span id="cartCount">0</span>)
+
+</div>
+
+    </div>
+
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Healthy Food For Better Life
+      </h1>
+
+      <p>
+        Chuyên cung cấp các loại hạt dinh dưỡng cao cấp,
+        granola healthy và thực phẩm organic.
+      </p>
+
+      <div class="hero-buttons">
+
+        <button onclick="goProducts()">
+          Mua Ngay
+        </button>
+
+        <a href="https://zalo.me/0983506653"
+           target="_blank">
+
+          <button>
+            Chat Zalo
+          </button>
+
+        </a>
+
+        <a href="#"
+           class="social-btn">
+
+          Facebook
+
+        </a>
+
+        <a href="#"
+           class="social-btn">
+
+          TikTok
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PRODUCTS -->
+
+  <section class="products-section"
+           id="products">
+
+    <div class="section-title">
+
+      <h2>
+        Sản Phẩm Bán Chạy
+      </h2>
+
+    </div>
+
+    <div class="add-product-box"
+         id="adminBox"
+         style="display:none;">
+
+      <input
+        type="text"
+        id="productName"
+        placeholder="Tên sản phẩm"
+      >
+
+      <input
+        type="number"
+        id="productPrice"
+        placeholder="Giá sản phẩm"
+      >
+
+      <input
+        type="file"
+        id="productImage"
+      >
+
+      <img
+        id="previewImage"
+      >
+
+      <button onclick="addProduct()">
+
+        ➕ Thêm sản phẩm
+
+      </button>
+
+    </div>
+
+    <div class="products-grid"
+         id="productsGrid">
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about"
+           class="about-section">
+
+    <h2>
+      SHOP NGUYỄN TẤN ĐẠT
+    </h2>
+
+    <p>
+
+      Hạt Hương Việt chuyên cung cấp các loại hạt dinh dưỡng,
+      granola healthy và thực phẩm organic cao cấp.
+
+      Cam kết chất lượng - sạch - healthy - tốt cho sức khỏe.
+
+    </p>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="features-section">
+
+    <div class="feature-box">
+
+      <h3>🚚 Giao Hàng Nhanh</h3>
+
+      <p>
+        Giao hàng toàn quốc nhanh chóng
+        và đảm bảo an toàn.
+      </p>
+
+    </div>
+
+    <div class="feature-box">
+
+      <h3>🌿 Healthy & Organic</h3>
+
+      <p>
+        Sản phẩm sạch, tốt cho sức khỏe,
+        phù hợp chế độ eat clean.
+      </p>
+
+    </div>
+
+    <div class="feature-box">
+
+      <h3>💯 Chất Lượng Cao</h3>
+
+      <p>
+        Cam kết sản phẩm chất lượng,
+        nguồn gốc rõ ràng.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="contact-section">
+
+    <h2>
+
+      Liên Hệ Với Chúng Tôi
+
+    </h2>
+
+    <form class="contact-form">
+
+      <input
+        type="text"
+        placeholder="Tên của bạn"
+      >
+
+      <input
+        type="email"
+        placeholder="Email"
+      >
+
+      <textarea
+        placeholder="Nội dung"
+      ></textarea>
+
+      <button type="submit">
+
+        Gửi Liên Hệ
+
+      </button>
+
+    </form>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer id="footer">
+
+    <h3>
+
+      SHOP NGUYỄN TẤN ĐẠT
+
+    </h3>
+
+    <br>
+
+    <p>
+
+      📍Thôn Như Lân , Xã Nghĩa Trụ , Tỉnh Hưng Yên
+
+    </p>
+
+    <br>
+
+    <p>
+
+      📞 0983506653
+
+    </p>
+
+    <br>
+
+    <p>
+
+      ✉️ nguyentandat20323@gmail.com
+
+    </p>
+
+    <br>
+
+    <p>
+
+      © 2026 Shop Nguyễn Tấn Đạt
+
+    </p>
+
+  </footer>
+
+  <!-- OVERLAY -->
+
+  <div class="overlay"
+       id="overlay">
+
+  </div>
+
+
+<!-- CART SIDEBAR -->
+
+<div class="cart-sidebar"
+     id="cartSidebar">
+
+  <div class="cart-header">
+
+    <h2>
+
+      🛒 Giỏ Hàng
+
+    </h2>
+
+    <button onclick="closeCart()">
+
+      ✖
+
+    </button>
+
+  </div>
+
+  <div class="cart-items"
+       id="cartItems">
+
+  </div>
+
+  <!-- CART FOOTER -->
+
+  <div class="cart-footer">
+
+    <h3>
+
+      Tổng:
+      <span id="cartTotal">
+
+        0đ
+
+      </span>
+
+    </h3>
+
+    <!-- BUTTON -->
+
+    <button
+      class="checkout-btn"
+      onclick="toggleCheckoutForm()">
+
+      Thanh toán
+
+    </button>
+
+    <!-- FORM -->
+
+    <div
+      id="checkoutForm"
+      style="display:none; margin-top:15px;">
+
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Tên khách hàng"
+        class="checkout-input"
+      >
+
+      <input
+        type="text"
+        id="customerPhone"
+        placeholder="Số điện thoại"
+        class="checkout-input"
+      >
+
+      <input
+        type="text"
+        id="customerAddress"
+        placeholder="Địa chỉ giao hàng"
+        class="checkout-input"
+      >
+
+      <img
+        src="https://img.vietqr.io/image/MB-206209-compact.png"
+        class="qr-image"
+      >
+
+      <button
+        class="checkout-btn"
+        onclick="checkout()">
+
+        Xác nhận thanh toán
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+  <!-- TOAST -->
+
+  <div id="toast">
+
+    ✅ Đã thêm vào giỏ hàng
+
+  </div>
+
+  <!-- TOP BUTTON -->
+
+  <button id="topBtn"
+          onclick="scrollToTop()">
+
+    ↑
+
+  </button>
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>
