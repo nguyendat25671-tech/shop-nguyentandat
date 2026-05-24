@@ -1,4 +1,11 @@
-let products = JSON.parse(localStorage.getItem("products")) || [
+// =========================
+// PRODUCTS STORAGE
+// =========================
+
+let products =
+JSON.parse(
+  localStorage.getItem("products")
+) || [
 
   {
     id:1,
@@ -23,53 +30,373 @@ let products = JSON.parse(localStorage.getItem("products")) || [
 
 ];
 
+// =========================
+// DOM
+// =========================
+
+const adminProducts =
+document.getElementById("adminProducts");
+
+const previewImage =
+document.getElementById("previewImage");
+
+const imageInput =
+document.getElementById("image");
+
+// =========================
+// IMAGE PREVIEW
+// =========================
+
+if(imageInput){
+
+  imageInput.addEventListener(
+    "change",
+    function(){
+
+      const file =
+      this.files[0];
+
+      if(file){
+
+        const reader =
+        new FileReader();
+
+        reader.onload =
+        function(e){
+
+          previewImage.src =
+          e.target.result;
+
+          previewImage.style.display =
+          "block";
+
+        };
+
+        reader.readAsDataURL(file);
+
+      }
+
+    }
+  );
+
+}
+
+// =========================
+// ADD PRODUCT
+// =========================
 
 function addProduct(){
 
-  const name = document.getElementById("name").value;
+  const name =
+  document.getElementById("name")
+  .value.trim();
 
-  const price = document.getElementById("price").value;
+  const price =
+  document.getElementById("price")
+  .value.trim();
 
-  const image = document.getElementById("image").value;
+  const file =
+  document.getElementById("image")
+  .files[0];
 
-  if(!name || !price || !image){
-    alert("Nhập đầy đủ thông tin");
+  // VALIDATE
+
+  if(!name || !price || !file){
+
+    showToast(
+      "Vui lòng nhập đầy đủ thông tin",
+      "error"
+    );
+
     return;
+
   }
 
-  const newProduct = {
-    id: Date.now(),
-    name,
-    price:Number(price),
-    image
+  if(Number(price) <= 0){
+
+    showToast(
+      "Giá sản phẩm không hợp lệ",
+      "error"
+    );
+
+    return;
+
+  }
+
+  // READ IMAGE
+
+  const reader =
+  new FileReader();
+
+  reader.onload = function(e){
+
+    const newProduct = {
+
+      id: Date.now(),
+
+      name: name,
+
+      price: Number(price),
+
+      image: e.target.result
+
+    };
+
+    products.unshift(newProduct);
+
+    saveProducts();
+
+    renderAdminProducts();
+
+    resetForm();
+
+    showToast(
+      "Đã thêm sản phẩm thành công",
+      "success"
+    );
+
   };
 
-  products.push(newProduct);
+  reader.readAsDataURL(file);
+
+}
+
+// =========================
+// RENDER PRODUCTS
+// =========================
+
+function renderAdminProducts(){
+
+  adminProducts.innerHTML = "";
+
+  // EMPTY
+
+  if(products.length === 0){
+
+    adminProducts.innerHTML = `
+
+      <div class="empty-text">
+        Chưa có sản phẩm nào
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  // LOOP
+
+  products.forEach(product => {
+
+    adminProducts.innerHTML += `
+
+      <div class="admin-card">
+
+        <img
+          src="${product.image}"
+          alt="${product.name}"
+        >
+
+        <div class="product-info">
+
+          <h3>
+            ${product.name}
+          </h3>
+
+          <p>
+            💰 ${Number(product.price)
+              .toLocaleString()}đ
+          </p>
+
+          <div class="product-actions">
+
+            <button
+              class="delete-btn"
+              onclick="deleteProduct(${product.id})"
+            >
+
+              🗑 Xóa sản phẩm
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+// =========================
+// DELETE PRODUCT
+// =========================
+
+function deleteProduct(id){
+
+  const confirmDelete =
+  confirm(
+    "Bạn có chắc muốn xóa sản phẩm này?"
+  );
+
+  if(!confirmDelete){
+
+    return;
+
+  }
+
+  products =
+  products.filter(
+    product => product.id !== id
+  );
+
+  saveProducts();
+
+  renderAdminProducts();
+
+  showToast(
+    "Đã xóa sản phẩm",
+    "success"
+  );
+
+}
+
+// =========================
+// SAVE PRODUCTS
+// =========================
+
+function saveProducts(){
 
   localStorage.setItem(
     "products",
     JSON.stringify(products)
   );
 
-  renderAdminProducts();
+}
 
-  document.getElementById("name").value = "";
-  document.getElementById("price").value = "";
-  document.getElementById("image").value = "";
+// =========================
+// RESET FORM
+// =========================
+
+function resetForm(){
+
+  document.getElementById("name")
+  .value = "";
+
+  document.getElementById("price")
+  .value = "";
+
+  document.getElementById("image")
+  .value = "";
+
+  previewImage.src = "";
+
+  previewImage.style.display =
+  "none";
 
 }
 
-function deleteProduct(index){
+// =========================
+// TOAST
+// =========================
 
-  products.splice(index,1);
+function showToast(message, type){
 
-  localStorage.setItem(
-    "products",
-    JSON.stringify(products)
+  const toast =
+  document.createElement("div");
+
+  toast.innerText =
+  message;
+
+  toast.style.position =
+  "fixed";
+
+  toast.style.bottom =
+  "30px";
+
+  toast.style.right =
+  "30px";
+
+  toast.style.padding =
+  "14px 22px";
+
+  toast.style.borderRadius =
+  "12px";
+
+  toast.style.color =
+  "#fff";
+
+  toast.style.fontWeight =
+  "bold";
+
+  toast.style.fontSize =
+  "15px";
+
+  toast.style.zIndex =
+  "99999";
+
+  toast.style.boxShadow =
+  "0 5px 20px rgba(0,0,0,0.2)";
+
+  toast.style.transition =
+  "0.3s";
+
+  toast.style.opacity =
+  "0";
+
+  toast.style.transform =
+  "translateY(20px)";
+
+  // TYPE
+
+  if(type === "error"){
+
+    toast.style.background =
+    "#ff3b30";
+
+  }else{
+
+    toast.style.background =
+    "#16a34a";
+
+  }
+
+  document.body.appendChild(
+    toast
   );
 
-  renderAdminProducts();
+  setTimeout(()=>{
+
+    toast.style.opacity = "1";
+
+    toast.style.transform =
+    "translateY(0)";
+
+  },100);
+
+  setTimeout(()=>{
+
+    toast.style.opacity = "0";
+
+    toast.style.transform =
+    "translateY(20px)";
+
+    setTimeout(()=>{
+
+      toast.remove();
+
+    },300);
+
+  },2500);
 
 }
+
+// =========================
+// START
+// =========================
 
 renderAdminProducts();

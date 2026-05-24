@@ -1,42 +1,133 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin - Hạt Hương Việt</title>
 
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin Dashboard - SHOP NGUYỄN TẤN ĐẠT</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="admin.css">
+
+  <!-- FONT AWESOME -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
 </head>
 
 <body>
 
   <div class="admin-container">
 
-    <h1>Trang Quản Trị Sản Phẩm</h1>
+    <!-- HEADER -->
+
+    <div class="admin-header">
+
+      <div>
+
+        <h1>
+          🛒 Quản Trị Sản Phẩm
+        </h1>
+
+        <p class="sub-title">
+          Quản lý sản phẩm cửa hàng nhanh chóng và dễ dàng
+        </p>
+
+      </div>
+
+    </div>
 
     <!-- FORM -->
 
     <div class="admin-form">
 
-      <input type="text" id="name" placeholder="Tên sản phẩm">
+      <!-- PRODUCT NAME -->
 
-      <input type="number" id="price" placeholder="Giá sản phẩm">
+      <input
+        type="text"
+        id="name"
+        placeholder="Nhập tên sản phẩm..."
+      >
 
-      <input type="text" id="image" placeholder="Link hình ảnh">
+      <!-- PRODUCT PRICE -->
+
+      <input
+        type="number"
+        id="price"
+        placeholder="Nhập giá sản phẩm..."
+      >
+
+      <!-- IMAGE UPLOAD -->
+
+      <div class="upload-box">
+
+        <label for="image">
+
+          <i class="fa-solid fa-image"></i>
+
+          Chọn ảnh sản phẩm
+
+        </label>
+
+        <input
+          type="file"
+          id="image"
+          accept="image/*"
+        >
+
+      </div>
+
+      <!-- ADD BUTTON -->
 
       <button onclick="addProduct()">
+
+        <i class="fa-solid fa-plus"></i>
+
         Thêm sản phẩm
+
       </button>
 
     </div>
 
-    <!-- DANH SÁCH -->
+    <!-- PREVIEW IMAGE -->
 
-    <div id="adminProducts"></div>
+    <div class="preview-container">
+
+      <img
+        id="previewImage"
+        src=""
+        alt="Preview"
+      >
+
+    </div>
+
+    <!-- PRODUCT LIST -->
+
+    <div
+      id="adminProducts"
+      class="products-grid"
+    >
+
+      <p class="empty-text">
+        Chưa có sản phẩm nào
+      </p>
+
+    </div>
 
   </div>
+
+  <!-- JAVASCRIPT -->
 
   <script src="admin.js"></script>
 
 </body>
+
 </html>
