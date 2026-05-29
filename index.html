@@ -3,108 +3,191 @@
 
 <head>
 
-  <meta charset="UTF-8">
+  <!-- META -->
+
+  <meta charset="UTF-8" />
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  >
+  />
+
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  />
+
+  <!-- SEO -->
 
   <title>
-    SHOP NGUYỄN TẤN ĐẠT
+    GẠO HÒA NGHĨA | Gạo sạch chất lượng cao
   </title>
 
   <meta
     name="description"
-    content="Shop Nguyễn Tấn Đạt - Chuyên hạt dinh dưỡng, granola healthy và thực phẩm organic."
-  >
+    content="Kho Gạo Hòa Nghĩa chuyên bán buôn và bán lẻ gạo sạch chất lượng cao tại Hưng Yên. Giao hàng nhanh, giá tốt."
+  />
+
+  <meta
+    name="keywords"
+    content="gạo sạch, gạo ST25, gạo ngon, gạo Hưng Yên"
+  />
+
+  <meta
+    name="author"
+    content="Gạo Hòa Nghĩa"
+  />
+
+  <!-- OPEN GRAPH -->
+
+  <meta property="og:title" content="Kho Gạo Hòa Nghĩa" />
+
+  <meta
+    property="og:description"
+    content="Gạo sạch chất lượng cao giao tận nơi."
+  />
+
+  <meta
+    property="og:image"
+    content="cuahang.jpg"
+  />
+
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <!-- FAVICON -->
 
   <link
     rel="icon"
-    href="anh1.jpg"
+    href="favicon.ico"
+  />
+
+  <!-- GOOGLE FONT -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
   >
+
+  <!-- FONT AWESOME -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <!-- CSS -->
 
   <link
     rel="stylesheet"
     href="style.css"
-  >
+  />
 
 </head>
 
 <body>
 
-  <!-- LOADER -->
+  <!-- =========================
+  LOADER
+  ========================= -->
 
   <div id="loader">
+
     <div class="spinner"></div>
+
   </div>
 
-  <!-- HEADER -->
+  <!-- =========================
+  HEADER
+  ========================= -->
 
   <header class="header">
 
-    <div class="logo">
-      SHOP NGUYỄN TẤN ĐẠT
-    </div>
+    <div class="container header-container">
 
-    <!-- MOBILE BUTTON -->
+      <!-- LOGO -->
 
-    <button
-      class="menu-toggle"
-      onclick="toggleMenu()"
-    >
-      ☰
-    </button>
-
-    <!-- NAV -->
-
-    <nav id="navbar">
-
-      <a href="#">
-        Trang Chủ
-      </a>
-
-      <a href="#products">
-        Sản Phẩm
-      </a>
-
-      <a href="#about">
-        Giới Thiệu
-      </a>
-
-      <a href="#footer">
-        Liên Hệ
-      </a>
-
-    </nav>
-
-    <!-- RIGHT -->
-
-    <div class="header-right">
-
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Tìm sản phẩm..."
-        class="search-box"
+      <a
+        href="#"
+        class="logo"
       >
+
+        <i class="fa-solid fa-wheat-awn"></i>
+
+        <div class="logo-text">
+
+          <h2>GẠO HÒA NGHĨA</h2>
+
+          <span>Gạo sạch chất lượng cao</span>
+
+        </div>
+
+      </a>
+
+      <!-- MENU MOBILE -->
 
       <button
-        onclick="toggleDarkMode()"
-        class="dark-btn"
-      >
-        🌙
-      </button>
+  class="menu-toggle"
+  id="menuToggle"
+  onclick="toggleMenu()"
+>
+  <i class="fa-solid fa-bars"></i>
+</button>
 
-      <div
-        class="cart-btn"
-        onclick="openCart()"
-      >
+      <!-- NAV -->
 
-        🛒
-        <span id="cartCount">
-          0
-        </span>
+      <nav id="navbar">
+
+        <a href="#">Trang chủ</a>
+
+        <a href="#products">Sản phẩm</a>
+
+        <a href="#features">Cam kết</a>
+
+        <a href="#reviews">Đánh giá</a>
+
+        <a href="#blog">Tin tức</a>
+
+        <a href="lienhe.html">Liên hệ</a>
+
+      </nav>
+
+      <!-- RIGHT -->
+
+      <div class="header-right">
+ <div class="search-wrapper">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="text"
+      id="searchInput"
+      class="search-box"
+      placeholder="Tìm sản phẩm..."
+    >
+
+</div>
+
+        <!-- CART -->
+
+        <button
+          class="cart-btn"
+          onclick="openCart()"
+        >
+
+          <i class="fa-solid fa-cart-shopping"></i>
+
+          <span id="cartCount">
+            0
+          </span>
+
+        </button>
 
       </div>
 
@@ -112,235 +195,447 @@
 
   </header>
 
-  <!-- HERO -->
+  <!-- ======================================================
+HERO PREMIUM
+====================================================== -->
 
-  <section class="hero">
+<section class="hero">
 
-    <div class="hero-content">
+  <!-- SLIDER -->
 
-      <h1>
-        Healthy Food
-        For Better Life
-      </h1>
+  <div class="hero-slider">
 
-      <p>
-        Chuyên cung cấp các loại hạt dinh dưỡng,
-        granola healthy và thực phẩm organic cao cấp.
-      </p>
+    <img src="gao1.jpg" class="hero-bg active">
 
-      <div class="hero-buttons">
+    <img src="gao2.jpg" class="hero-bg">
 
-        <button onclick="goProducts()">
-          Mua Ngay
-        </button>
+    <img src="logogao.jpg" class="hero-bg">
 
-        <a
-          href="https://zalo.me/0983506653"
-          target="_blank"
-        >
+  </div>
 
-          <button>
-            Chat Zalo
-          </button>
+  <!-- OVERLAY -->
 
-        </a>
+  <div class="hero-overlay"></div>
 
-      </div>
+  <!-- GLOW -->
 
-      <!-- SOCIAL -->
+  <div class="hero-glow"></div>
 
-      <div class="social-links">
+  <!-- CONTENT -->
 
-        <a href="#">
-          Facebook
-        </a>
+  <div class="hero-content">
 
-        <a href="#">
-          TikTok
-        </a>
+    <span class="hero-badge">
 
-        <a href="#">
-          Instagram
-        </a>
+      GẠO SẠCH • CHẤT LƯỢNG CAO • GIAO NHANH
 
-      </div>
+    </span>
+
+    <h1>
+        KHO GẠO <span>HÒA NGHĨA</span>
+    </h1>
+
+    <div class="hero-line">
+        <span></span>
+        <i class="fa-solid fa-wheat-awn"></i>
+        <span></span>
+    </div>
+
+    <h2>VĂN GIANG</h2>
+
+    <!-- BUTTONS -->
+
+    <div class="hero-buttons">
+
+      <a href="#products" class="primary-btn">
+
+        Xem sản phẩm
+
+      </a>
+
+      <a href="lienhe.html" class="secondary-btn">
+
+        Liên hệ ngay
+
+      </a>
 
     </div>
 
-  </section>
+  </div>
 
-  <!-- PRODUCTS -->
+  <!-- SCROLL -->
+
+  <div class="scroll-down">
+
+    <span></span>
+
+  </div>
+
+</section>
+  <!-- =========================
+  PRODUCTS
+  ========================= -->
 
   <section
     class="products-section"
     id="products"
   >
 
-    <div class="section-title">
+    <div class="container">
 
-      <h2>
-        Sản Phẩm Bán Chạy
-      </h2>
+      <div class="section-title">
 
-      <p>
-        Healthy - Organic - Chất lượng cao
-      </p>
+        <span>
+          SẢN PHẨM
+        </span>
+
+        <h2>
+          DANH MỤC GẠO CHẤT LƯỢNG
+        </h2>
+
+        <p>
+          Gạo sạch • Thơm ngon • Giá tốt mỗi ngày
+        </p>
+
+      </div>
+
+      <!-- FILTER -->
+
+      <div class="category-filter">
+
+        <button
+          class="filter-btn active"
+          data-filter="all"
+        >
+          Tất cả
+        </button>
+
+        <button
+          class="filter-btn"
+          data-filter="Gạo ST25"
+        >
+          Gạo ST25
+        </button>
+
+        <button
+          class="filter-btn"
+          data-filter="Gạo thơm"
+        >
+          Gạo thơm
+        </button>
+
+        <button
+          class="filter-btn"
+          data-filter="Gạo nếp"
+        >
+          Gạo nếp
+        </button>
+
+        <button
+          class="filter-btn"
+          data-filter="Gạo tấm"
+        >
+          Gạo tấm
+        </button>
+
+      </div>
+
+      <!-- PRODUCTS GRID -->
+
+      <div
+        class="products-grid"
+        id="productsGrid"
+      >
+
+      </div>
 
     </div>
 
-    <!-- GRID -->
-
-    <div
-      class="products-grid"
-      id="productsGrid"
-    ></div>
-
   </section>
 
-  <!-- ABOUT -->
+  <!-- =========================
+  FEATURES
+  ========================= -->
 
   <section
-    id="about"
-    class="about-section"
+    class="features-section"
+    id="features"
   >
 
-    <h2>
-      SHOP NGUYỄN TẤN ĐẠT
-    </h2>
+    <div class="container">
 
-    <p>
-      Chuyên cung cấp các loại hạt dinh dưỡng,
-      granola healthy và thực phẩm organic cao cấp.
+      <div class="section-title">
 
-      Cam kết chất lượng - sạch - healthy -
-      tốt cho sức khỏe.
-    </p>
+        <span>
+          CAM KẾT
+        </span>
 
-  </section>
+        <h2>
+          CHẤT LƯỢNG HÀNG ĐẦU
+        </h2>
 
-  <!-- FEATURES -->
+      </div>
 
-  <section class="features-section">
+      <div class="features-grid">
 
-    <div class="feature-box">
+        <div class="feature-box">
 
-      <h3>
-        🚚 Giao Hàng Nhanh
-      </h3>
+          <i class="fa-solid fa-seedling"></i>
 
-      <p>
-        Giao hàng toàn quốc nhanh chóng
-        và an toàn.
-      </p>
+          <h3>Gạo sạch tự nhiên</h3>
+
+          <p>
+            Tuyển chọn từ nguồn nguyên liệu an toàn.
+          </p>
+
+        </div>
+
+        <div class="feature-box">
+
+          <i class="fa-solid fa-award"></i>
+
+          <h3>Chất lượng cao</h3>
+
+          <p>
+            Hạt gạo thơm ngon, dẻo mềm tự nhiên.
+          </p>
+
+        </div>
+
+        <div class="feature-box">
+
+          <i class="fa-solid fa-box"></i>
+
+          <h3>Đóng gói kỹ</h3>
+
+          <p>
+            Đảm bảo vệ sinh và vận chuyển an toàn.
+          </p>
+
+        </div>
+
+        <div class="feature-box">
+
+          <i class="fa-solid fa-truck-fast"></i>
+
+          <h3>Giao nhanh</h3>
+
+          <p>
+            Hỗ trợ giao hàng toàn quốc nhanh chóng.
+          </p>
+
+        </div>
+
+      </div>
 
     </div>
 
-    <div class="feature-box">
+  </section>
 
-      <h3>
-        🌿 Healthy & Organic
-      </h3>
+  <!-- =========================
+  ABOUT
+  ========================= -->
 
-      <p>
-        Sản phẩm sạch,
-        phù hợp eat clean.
-      </p>
+  <section class="about-section">
 
-    </div>
+    <div class="container about-container">
 
-    <div class="feature-box">
+      <div class="about-image">
 
-      <h3>
-        💯 Chất Lượng Cao
-      </h3>
+        <img
+          src="gao1.jpg"
+          alt="Kho gạo"
+        />
 
-      <p>
-        Cam kết chất lượng
-        và nguồn gốc rõ ràng.
-      </p>
+      </div>
+
+      <div class="about-content">
+
+        <span>
+          GIỚI THIỆU
+        </span>
+
+        <h2>
+          Kho Gạo Hòa Nghĩa
+        </h2>
+
+        <p>
+
+          Chuyên bán buôn và bán lẻ các loại gạo
+          sạch chất lượng cao tại Hưng Yên.
+
+        </p>
+
+        <div class="about-stats">
+
+          <div>
+
+            <h3>10+</h3>
+
+            <p>Năm kinh nghiệm</p>
+
+          </div>
+
+          <div>
+
+            <h3>1000+</h3>
+
+            <p>Khách hàng</p>
+
+          </div>
+
+          <div>
+
+            <h3>20+</h3>
+
+            <p>Loại gạo</p>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
   </section>
 
-  <!-- CONTACT -->
+  <!-- =========================
+  REVIEWS
+  ========================= -->
 
-  <section class="contact-section">
+  <section
+    class="reviews-section"
+    id="reviews"
+  >
 
-    <h2>
-      Liên Hệ Với Chúng Tôi
-    </h2>
+    <div class="container">
 
-    <form class="contact-form">
+      <div class="section-title">
 
-      <input
-        type="text"
-        placeholder="Tên của bạn"
-      >
+        <span>ĐÁNH GIÁ</span>
 
-      <input
-        type="email"
-        placeholder="Email"
-      >
+        <h2>KHÁCH HÀNG NÓI GÌ</h2>
 
-      <textarea
-        placeholder="Nội dung"
-      ></textarea>
+      </div>
 
-      <button type="submit">
-        Gửi Liên Hệ
-      </button>
+      <div class="reviews-grid">
 
-    </form>
+        <div class="review-card">
+
+          <img src="em6.jpg">
+
+          <h3>Khách hàng Văn Giang</h3>
+
+          <div class="stars">
+            ⭐⭐⭐⭐⭐
+          </div>
+
+          <p>
+            Gạo rất ngon và thơm.
+          </p>
+
+        </div>
+
+        <div class="review-card">
+
+          <img src="https://i.pravatar.cc/120?img=2">
+
+          <h3>Khách hàng Hưng Yên</h3>
+
+          <div class="stars">
+            ⭐⭐⭐⭐⭐
+          </div>
+
+          <p>
+            Giao hàng rất nhanh.
+          </p>
+
+        </div>
+
+        <div class="review-card">
+
+          <img src="https://i.pravatar.cc/120?img=3">
+
+          <h3>Khách hàng Hà Nội</h3>
+
+          <div class="stars">
+            ⭐⭐⭐⭐⭐
+          </div>
+
+          <p>
+            Chất lượng rất tốt.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </section>
 
-  <!-- FOOTER -->
+  <!-- =========================
+  FOOTER
+  ========================= -->
+<footer class="footer">
 
-  <footer id="footer">
+    <div class="footer-content">
 
-    <h3>
-      SHOP NGUYỄN TẤN ĐẠT
-    </h3>
+        <div class="footer-logo">
 
-    <p>
-      📍 Hưng Yên, Việt Nam
-    </p>
+            <i class="fa-solid fa-wheat-awn"></i>
 
-    <p>
-      📞 0983506653
-    </p>
+            <h2>KHO GẠO HÒA NGHĨA</h2>
 
-    <p>
-      ✉️ nguyentandat20323@gmail.com
-    </p>
+            <p>Gạo sạch chất lượng cao • Uy tín hàng đầu</p>
 
-    <p class="copyright">
-      © 2026 Shop Nguyễn Tấn Đạt
-    </p>
+        </div>
 
-  </footer>
+        <div class="footer-social">
 
-  <!-- OVERLAY -->
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+
+            <a href="#"><i class="fab fa-youtube"></i></a>
+
+            <a href="#"><i class="fab fa-telegram"></i></a>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 Nguyễn Tấn Đạt
+
+        </div>
+
+    </div>
+
+</footer>
+
+  <!-- =========================
+  OVERLAY
+  ========================= -->
 
   <div
     class="overlay"
     id="overlay"
   ></div>
 
-  <!-- CART -->
+  <!-- =========================
+  CART
+  ========================= -->
 
   <div
     class="cart-sidebar"
     id="cartSidebar"
   >
 
-    <!-- HEADER -->
-
     <div class="cart-header">
 
       <h2>
-        🛒 Giỏ Hàng
+        🛒 Giỏ hàng
       </h2>
 
       <button onclick="closeCart()">
@@ -349,14 +644,10 @@
 
     </div>
 
-    <!-- ITEMS -->
-
     <div
       class="cart-items"
       id="cartItems"
     ></div>
-
-    <!-- FOOTER -->
 
     <div class="cart-footer">
 
@@ -373,10 +664,10 @@
         class="checkout-btn"
         onclick="toggleCheckoutForm()"
       >
-        Thanh Toán
-      </button>
 
-      <!-- FORM -->
+        Thanh toán
+
+      </button>
 
       <div
         id="checkoutForm"
@@ -388,34 +679,34 @@
           id="customerName"
           placeholder="Tên khách hàng"
           class="checkout-input"
-        >
+        />
 
         <input
           type="text"
           id="customerPhone"
           placeholder="Số điện thoại"
           class="checkout-input"
-        >
+        />
 
         <input
           type="text"
           id="customerAddress"
           placeholder="Địa chỉ giao hàng"
           class="checkout-input"
-        >
-
-        <!-- QR -->
+        />
 
         <img
-          src="https://img.vietqr.io/image/MB-206209-compact.png"
+          src="88.jpg"
           class="qr-image"
-        >
+        />
 
         <button
           class="checkout-btn"
           onclick="checkout()"
         >
+
           Xác nhận thanh toán
+
         </button>
 
       </div>
@@ -424,18 +715,62 @@
 
   </div>
 
-  <!-- TOP BUTTON -->
+  <!-- FLOAT BUTTON -->
 
-  <button
-    id="topBtn"
-    onclick="scrollToTop()"
+  <a
+    href="https://zalo.me/0345085074"
+    class="zalo-float"
+    target="_blank"
   >
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
+
+  </a>
+
+  <!-- MUSIC -->
+
+  <div id="musicToggle">
+
+    <i class="fa-solid fa-music"></i>
+
+  </div>
+
+  <!-- BACK TO TOP -->
+
+  <button id="backToTop">
+
     ↑
+
   </button>
 
-  <!-- SCRIPT -->
+  <!-- AUDIO -->
 
-  <script src="app.js"></script>
+  <audio
+    id="backgroundMusic"
+    loop
+  >
+
+    <source
+      src="chiecbungdoi.mp3"
+      type="audio/mpeg"
+    >
+
+  </audio>
+
+  <!-- APP JS -->
+
+  <script
+    type="module"
+    src="app.js"
+  ></script>
+
+  <!-- CHAT -->
+
+  <script
+    id="chatway"
+    async="true"
+    src="https://cdn.chatway.app/widget.js?id=ElBL7RpFL6LW"
+  ></script>
 
 </body>
 

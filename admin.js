@@ -1,41 +1,130 @@
-// =========================
-// PRODUCTS STORAGE
-// =========================
+// ======================================================
+// FIREBASE IMPORT
+// ======================================================
 
-let products =
-JSON.parse(
-  localStorage.getItem("products")
-) || [
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-  {
-    id:1,
-    name:"Hạt Dẻ Cười Premium",
-    price:119000,
-    image:"https://images.unsplash.com/photo-1549007994-cb92caebd54b?q=80&w=1200&auto=format&fit=crop"
-  },
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  doc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  {
-    id:2,
-    name:"Hạt Macca Úc",
-    price:350000,
-    image:"https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop"
-  },
+// ======================================================
+// FIREBASE CONFIG
+// ======================================================
 
-  {
-    id:3,
-    name:"Granola Dâu Tây",
-    price:200000,
-    image:"https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?q=80&w=1200&auto=format&fit=crop"
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyCqFcZe-p8GBB0sdo5K4QAFex52_5--nLQ",
+
+  authDomain:
+  "shoptandat-baf8c.firebaseapp.com",
+
+  projectId:
+  "shoptandat-baf8c",
+
+  storageBucket:
+  "shoptandat-baf8c.appspot.com",
+
+  messagingSenderId:
+  "757338881059",
+
+  appId:
+  "1:757338881059:web:cc1da8a24693f554a68596"
+
+};
+
+// ======================================================
+// INIT FIREBASE
+// ======================================================
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+// ======================================================
+// TELEGRAM
+// ======================================================
+
+const TELEGRAM_BOT_TOKEN =
+"8290012420:AAEDlZvBKk6y8cNY40qu_frp6ppcy-2atP8";
+
+const TELEGRAM_CHAT_ID =
+"7166493375";
+
+// ======================================================
+// SEND TELEGRAM
+// ======================================================
+
+async function sendTelegram(message){
+
+  try{
+
+    await fetch(
+
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+          chat_id:TELEGRAM_CHAT_ID,
+
+          text:message,
+
+          parse_mode:"HTML"
+
+        })
+
+      }
+
+    );
+
   }
 
-];
+  catch(error){
 
-// =========================
+    console.log(error);
+
+  }
+
+}
+
+// ======================================================
+// CLOUDINARY
+// ======================================================
+
+const CLOUD_NAME =
+"diw9ytkdz";
+
+const UPLOAD_PRESET =
+"shop_upload";
+
+// ======================================================
 // DOM
-// =========================
+// ======================================================
 
 const adminProducts =
 document.getElementById("adminProducts");
+
+const adminOrders =
+document.getElementById("adminOrders");
 
 const previewImage =
 document.getElementById("previewImage");
@@ -43,9 +132,52 @@ document.getElementById("previewImage");
 const imageInput =
 document.getElementById("image");
 
-// =========================
+const totalProducts =
+document.getElementById("totalProducts");
+
+const totalOrders =
+document.getElementById("totalOrders");
+
+const totalCustomers =
+document.getElementById("totalCustomers");
+
+const totalRevenue =
+document.getElementById("totalRevenue");
+
+const doneOrders =
+document.getElementById("doneOrders");
+
+const pendingOrders =
+document.getElementById("pendingOrders");
+
+const cancelOrders =
+document.getElementById("cancelOrders");
+
+const music =
+document.getElementById("adminMusic");
+
+// ======================================================
+// DATA
+// ======================================================
+
+let products = [];
+
+let orders = [];
+
+// ======================================================
+// FORMAT MONEY
+// ======================================================
+
+function formatMoney(price){
+
+  return Number(price || 0)
+  .toLocaleString("vi-VN") + "đ";
+
+}
+
+// ======================================================
 // IMAGE PREVIEW
-// =========================
+// ======================================================
 
 if(imageInput){
 
@@ -58,21 +190,11 @@ if(imageInput){
 
       if(file){
 
-        const reader =
-        new FileReader();
+        previewImage.src =
+        URL.createObjectURL(file);
 
-        reader.onload =
-        function(e){
-
-          previewImage.src =
-          e.target.result;
-
-          previewImage.style.display =
-          "block";
-
-        };
-
-        reader.readAsDataURL(file);
+        previewImage.style.display =
+        "block";
 
       }
 
@@ -81,111 +203,151 @@ if(imageInput){
 
 }
 
-// =========================
-// ADD PRODUCT
-// =========================
+// ======================================================
+// UPLOAD IMAGE
+// ======================================================
 
-function addProduct(){
+async function uploadImageToCloudinary(file){
 
-  const name =
-  document.getElementById("name")
-  .value.trim();
+  const formData =
+  new FormData();
 
-  const price =
-  document.getElementById("price")
-  .value.trim();
+  formData.append(
+    "file",
+    file
+  );
 
-  const file =
-  document.getElementById("image")
-  .files[0];
+  formData.append(
+    "upload_preset",
+    UPLOAD_PRESET
+  );
 
-  // VALIDATE
+  const response =
+  await fetch(
 
-  if(!name || !price || !file){
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
 
-    showToast(
-      "Vui lòng nhập đầy đủ thông tin",
-      "error"
-    );
+    {
+      method:"POST",
+      body:formData
+    }
 
-    return;
+  );
 
-  }
+  const data =
+  await response.json();
 
-  if(Number(price) <= 0){
-
-    showToast(
-      "Giá sản phẩm không hợp lệ",
-      "error"
-    );
-
-    return;
-
-  }
-
-  // READ IMAGE
-
-  const reader =
-  new FileReader();
-
-  reader.onload = function(e){
-
-    const newProduct = {
-
-      id: Date.now(),
-
-      name: name,
-
-      price: Number(price),
-
-      image: e.target.result
-
-    };
-
-    products.unshift(newProduct);
-
-    saveProducts();
-
-    renderAdminProducts();
-
-    resetForm();
-
-    showToast(
-      "Đã thêm sản phẩm thành công",
-      "success"
-    );
-
-  };
-
-  reader.readAsDataURL(file);
+  return data.secure_url;
 
 }
 
-// =========================
-// RENDER PRODUCTS
-// =========================
+// ======================================================
+// DASHBOARD
+// ======================================================
 
-function renderAdminProducts(){
+function updateDashboard(){
+
+  totalProducts.innerText =
+  products.length;
+
+  totalOrders.innerText =
+  orders.length;
+
+  const customers =
+  [...new Set(
+    orders.map(o => o.phone)
+  )];
+
+  totalCustomers.innerText =
+  customers.length;
+
+  let revenue = 0;
+
+  let done = 0;
+
+  let pending = 0;
+
+  let cancel = 0;
+
+  orders.forEach(order => {
+
+    if(order.status === "Đã xác nhận"){
+
+      revenue +=
+      Number(order.total || 0);
+
+      done++;
+
+    }
+
+    else if(
+      order.status === "Đã hủy"
+    ){
+
+      cancel++;
+
+    }
+
+    else{
+
+      pending++;
+
+    }
+
+  });
+
+  totalRevenue.innerText =
+  formatMoney(revenue);
+
+  doneOrders.innerText =
+  done;
+
+  pendingOrders.innerText =
+  pending;
+
+  cancelOrders.innerText =
+  cancel;
+
+}
+
+// ======================================================
+// LOAD PRODUCTS
+// ======================================================
+
+async function loadProducts(){
 
   adminProducts.innerHTML = "";
 
-  // EMPTY
+  products = [];
+
+  const querySnapshot =
+  await getDocs(
+    collection(db,"products")
+  );
+
+  querySnapshot.forEach(docSnap => {
+
+    products.push({
+
+      id:docSnap.id,
+
+      ...docSnap.data()
+
+    });
+
+  });
 
   if(products.length === 0){
 
     adminProducts.innerHTML = `
-
-      <div class="empty-text">
-        Chưa có sản phẩm nào
-      </div>
-
+      <p class="empty-text">
+        Chưa có sản phẩm
+      </p>
     `;
 
     return;
 
   }
-
-  // LOOP
 
   products.forEach(product => {
 
@@ -193,30 +355,38 @@ function renderAdminProducts(){
 
       <div class="admin-card">
 
-        <img
-          src="${product.image}"
-          alt="${product.name}"
-        >
+        <div class="product-image">
+
+          <img src="${product.image}">
+
+        </div>
 
         <div class="product-info">
+
+          <div class="product-category">
+
+            ${product.category}
+
+          </div>
 
           <h3>
             ${product.name}
           </h3>
 
-          <p>
-            💰 ${Number(product.price)
-              .toLocaleString()}đ
-          </p>
+          <div class="product-price">
+
+            ${formatMoney(product.price)}
+
+          </div>
 
           <div class="product-actions">
 
             <button
               class="delete-btn"
-              onclick="deleteProduct(${product.id})"
+              onclick="deleteProduct('${product.id}')"
             >
 
-              🗑 Xóa sản phẩm
+              Xóa
 
             </button>
 
@@ -230,173 +400,519 @@ function renderAdminProducts(){
 
   });
 
+  updateDashboard();
+
 }
 
-// =========================
-// DELETE PRODUCT
-// =========================
+// ======================================================
+// LOAD ORDERS
+// ======================================================
 
-function deleteProduct(id){
+async function loadOrders(){
 
-  const confirmDelete =
-  confirm(
-    "Bạn có chắc muốn xóa sản phẩm này?"
+  adminOrders.innerHTML = "";
+
+  orders = [];
+
+  const querySnapshot =
+  await getDocs(
+    collection(db,"orders")
   );
 
-  if(!confirmDelete){
+  querySnapshot.forEach(docSnap => {
+
+    orders.push({
+
+      id:docSnap.id,
+
+      ...docSnap.data()
+
+    });
+
+  });
+
+  orders.reverse();
+
+  if(orders.length === 0){
+
+    adminOrders.innerHTML = `
+      <p class="empty-text">
+        Chưa có đơn hàng
+      </p>
+    `;
 
     return;
 
   }
 
-  products =
-  products.filter(
-    product => product.id !== id
-  );
+  orders.forEach(order => {
 
-  saveProducts();
+    let productsHTML = "";
 
-  renderAdminProducts();
+    if(order.items){
 
-  showToast(
-    "Đã xóa sản phẩm",
-    "success"
-  );
+      order.items.forEach(item => {
+
+        productsHTML += `
+
+          <div class="order-product-item">
+
+            <span>
+              ${item.name}
+            </span>
+
+            <strong>
+              x${item.quantity}
+            </strong>
+
+          </div>
+
+        `;
+
+      });
+
+    }
+
+    let statusClass = "pending";
+
+    if(order.status === "Đã xác nhận"){
+      statusClass = "success";
+    }
+
+    if(order.status === "Đã hủy"){
+      statusClass = "cancel";
+    }
+
+    adminOrders.innerHTML += `
+
+      <div class="order-card">
+
+        <div class="order-top">
+
+          <h3>
+            Đơn #${order.id}
+          </h3>
+
+          <div class="order-status ${statusClass}">
+
+            ${order.status || "Đang xử lý"}
+
+          </div>
+
+        </div>
+
+        <p>
+          👤 ${order.customer}
+        </p>
+
+        <p>
+          📞 ${order.phone}
+        </p>
+
+        <p>
+          📍 ${order.address}
+        </p>
+
+        <div class="order-products">
+
+          ${productsHTML}
+
+        </div>
+
+        <div class="order-total">
+
+          ${formatMoney(order.total)}
+
+        </div>
+
+        <div class="order-actions">
+
+          <button
+            class="confirm-btn"
+            onclick="confirmOrder('${order.id}')"
+          >
+            Xác nhận
+          </button>
+
+          <button
+            class="cancel-btn"
+            onclick="cancelOrder('${order.id}')"
+          >
+            Hủy
+          </button>
+
+          <button
+            class="delete-btn"
+            onclick="deleteOrder('${order.id}')"
+          >
+            Xóa
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  updateDashboard();
 
 }
 
-// =========================
-// SAVE PRODUCTS
-// =========================
+// ======================================================
+// ADD PRODUCT
+// ======================================================
 
-function saveProducts(){
+window.addProduct =
+async function(){
 
-  localStorage.setItem(
-    "products",
-    JSON.stringify(products)
-  );
+  try{
 
-}
+    const name =
+    document.getElementById("name")
+    .value;
 
-// =========================
-// RESET FORM
-// =========================
+    const price =
+    document.getElementById("price")
+    .value;
 
-function resetForm(){
+    const category =
+    document.getElementById("category")
+    .value;
 
-  document.getElementById("name")
-  .value = "";
+    const file =
+    document.getElementById("image")
+    .files[0];
 
-  document.getElementById("price")
-  .value = "";
+    if(
+      !name ||
+      !price ||
+      !category
+    ){
 
-  document.getElementById("image")
-  .value = "";
+      alert(
+        "Nhập đầy đủ thông tin"
+      );
 
-  previewImage.src = "";
+      return;
 
-  previewImage.style.display =
-  "none";
+    }
 
-}
+    let imageUrl = "";
 
-// =========================
-// TOAST
-// =========================
+    if(file){
 
-function showToast(message, type){
+      imageUrl =
+      await uploadImageToCloudinary(file);
 
-  const toast =
-  document.createElement("div");
+    }
 
-  toast.innerText =
-  message;
+    await addDoc(
+      collection(db,"products"),
+      {
 
-  toast.style.position =
-  "fixed";
+        name:name,
 
-  toast.style.bottom =
-  "30px";
+        price:Number(price),
 
-  toast.style.right =
-  "30px";
+        category:category,
 
-  toast.style.padding =
-  "14px 22px";
+        image:imageUrl
 
-  toast.style.borderRadius =
-  "12px";
+      }
+    );
 
-  toast.style.color =
-  "#fff";
+    await sendTelegram(
 
-  toast.style.fontWeight =
-  "bold";
+`🆕 SẢN PHẨM MỚI
 
-  toast.style.fontSize =
-  "15px";
+📦 ${name}
 
-  toast.style.zIndex =
-  "99999";
+💰 ${formatMoney(price)}
 
-  toast.style.boxShadow =
-  "0 5px 20px rgba(0,0,0,0.2)";
+📂 ${category}`
 
-  toast.style.transition =
-  "0.3s";
+    );
 
-  toast.style.opacity =
-  "0";
+    alert("Đã thêm sản phẩm");
 
-  toast.style.transform =
-  "translateY(20px)";
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("category").value = "";
+    document.getElementById("image").value = "";
 
-  // TYPE
+    previewImage.style.display = "none";
 
-  if(type === "error"){
-
-    toast.style.background =
-    "#ff3b30";
-
-  }else{
-
-    toast.style.background =
-    "#16a34a";
+    loadProducts();
 
   }
 
-  document.body.appendChild(
-    toast
+  catch(error){
+
+    console.log(error);
+
+    alert("Lỗi thêm sản phẩm");
+
+  }
+
+};
+
+// ======================================================
+// DELETE PRODUCT
+// ======================================================
+
+window.deleteProduct =
+async function(id){
+
+  const ok =
+  confirm("Xóa sản phẩm?");
+
+  if(!ok) return;
+
+  await deleteDoc(
+    doc(db,"products",id)
   );
 
-  setTimeout(()=>{
+  await sendTelegram(
 
-    toast.style.opacity = "1";
+`🗑️ ĐÃ XÓA SẢN PHẨM
 
-    toast.style.transform =
-    "translateY(0)";
+🆔 ${id}`
 
-  },100);
+  );
 
-  setTimeout(()=>{
+  loadProducts();
 
-    toast.style.opacity = "0";
+};
 
-    toast.style.transform =
-    "translateY(20px)";
+// ======================================================
+// CONFIRM ORDER
+// ======================================================
+
+window.confirmOrder =
+async function(id){
+
+  await updateDoc(
+    doc(db,"orders",id),
+    {
+      status:"Đã xác nhận"
+    }
+  );
+
+  await sendTelegram(
+
+`✅ ĐƠN HÀNG ĐÃ XÁC NHẬN
+
+🆔 ${id}`
+
+  );
+
+  loadOrders();
+
+};
+
+// ======================================================
+// CANCEL ORDER
+// ======================================================
+
+window.cancelOrder =
+async function(id){
+
+  await updateDoc(
+    doc(db,"orders",id),
+    {
+      status:"Đã hủy"
+    }
+  );
+
+  await sendTelegram(
+
+`❌ ĐƠN HÀNG ĐÃ HỦY
+
+🆔 ${id}`
+
+  );
+
+  loadOrders();
+
+};
+
+// ======================================================
+// DELETE ORDER
+// ======================================================
+
+window.deleteOrder =
+async function(id){
+
+  const ok =
+  confirm("Xóa đơn hàng?");
+
+  if(!ok) return;
+
+  await deleteDoc(
+    doc(db,"orders",id)
+  );
+
+  await sendTelegram(
+
+`🗑️ ĐƠN HÀNG ĐÃ XÓA
+
+🆔 ${id}`
+
+  );
+
+  loadOrders();
+
+};
+
+// ======================================================
+// SEARCH PRODUCTS
+// ======================================================
+
+window.searchProducts =
+function(){
+
+  const keyword =
+  document.getElementById(
+    "searchProduct"
+  ).value.toLowerCase();
+
+  const cards =
+  document.querySelectorAll(
+    ".admin-card"
+  );
+
+  cards.forEach(card => {
+
+    const name =
+    card.innerText.toLowerCase();
+
+    if(name.includes(keyword)){
+
+      card.style.display =
+      "block";
+
+    }
+
+    else{
+
+      card.style.display =
+      "none";
+
+    }
+
+  });
+
+};
+
+// ======================================================
+// EXPORT EXCEL
+// ======================================================
+
+window.exportOrders =
+function(){
+
+  const data = orders.map(order => ({
+
+    id:order.id,
+
+    customer:order.customer,
+
+    phone:order.phone,
+
+    address:order.address,
+
+    total:order.total,
+
+    status:order.status
+
+  }));
+
+  const worksheet =
+  XLSX.utils.json_to_sheet(data);
+
+  const workbook =
+  XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    workbook,
+    worksheet,
+    "Orders"
+  );
+
+  XLSX.writeFile(
+    workbook,
+    "orders.xlsx"
+  );
+
+};
+
+// ======================================================
+// SCROLL FORM
+// ======================================================
+
+window.scrollToForm =
+function(){
+
+  document.getElementById(
+    "productForm"
+  ).scrollIntoView({
+
+    behavior:"smooth"
+
+  });
+
+};
+
+// ======================================================
+// MUSIC
+// ======================================================
+
+window.toggleMusic =
+function(){
+
+  if(music.paused){
+
+    music.play();
+
+  }
+
+  else{
+
+    music.pause();
+
+  }
+
+};
+
+// ======================================================
+// LOADER
+// ======================================================
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    const loader =
+    document.getElementById(
+      "loader"
+    );
 
     setTimeout(()=>{
 
-      toast.remove();
+      loader.style.display =
+      "none";
 
-    },300);
+    },700);
 
-  },2500);
+  }
+);
 
-}
-
-// =========================
+// ======================================================
 // START
-// =========================
+// ======================================================
 
-renderAdminProducts();
+loadProducts();
+
+loadOrders();

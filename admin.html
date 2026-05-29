@@ -1,93 +1,313 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
 
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Admin Dashboard - SHOP NGUYỄN TẤN ĐẠT</title>
+  <title>ADMIN Nguyễn Tấn Đạt</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css"/>
 
   <!-- FONT AWESOME -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  >
+  />
 
 </head>
 
 <body>
 
-  <div class="admin-container">
+<!-- ===================================================== -->
+<!-- LOADER -->
+<!-- ===================================================== -->
 
-    <!-- HEADER -->
+<div id="loader">
+  <div class="spinner"></div>
+</div>
 
-    <div class="admin-header">
+<!-- ===================================================== -->
+<!-- MOBILE MENU -->
+<!-- ===================================================== -->
+
+<button class="mobile-toggle" onclick="toggleSidebar()">
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+<!-- ===================================================== -->
+<!-- ADMIN CONTAINER -->
+<!-- ===================================================== -->
+
+<div class="admin-container">
+
+  <!-- ===================================================== -->
+  <!-- SIDEBAR -->
+  <!-- ===================================================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <!-- LOGO -->
+
+    <div class="sidebar-logo">
+
+      <div class="logo-icon">
+        <i class="fa-solid fa-store"></i>
+      </div>
+
+      <div>
+        <h2>ADMIN Tấn Đạt</h2>
+        <span>Shop Nguyễn Tấn Đạt</span>
+      </div>
+
+    </div>
+
+    <!-- MENU -->
+
+    <ul class="sidebar-menu">
+
+      <li class="active">
+        <i class="fa-solid fa-box"></i>
+        <span>Sản phẩm</span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Đơn hàng</span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-users"></i>
+        <span>Khách hàng</span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Thống kê</span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Đăng xuất</span>
+      </li>
+
+    </ul>
+
+    <!-- FOOTER -->
+
+    <div class="sidebar-footer">
+
+      <div class="flag-3d">
+        <img src="ông28.jpg" alt="">
+      </div>
+
+      <p>© 2026 Nguyễn Tấn Đạt</p>
+
+    </div>
+
+  </aside>
+
+  <!-- ===================================================== -->
+  <!-- MAIN CONTENT -->
+  <!-- ===================================================== -->
+
+  <main class="main-content">
+
+    <!-- ===================================================== -->
+    <!-- TOPBAR -->
+    <!-- ===================================================== -->
+
+    <div class="topbar">
 
       <div>
 
-        <h1>
-          🛒 Quản Trị Sản Phẩm
-        </h1>
+        <h1>Dashboard Quản Trị</h1>
 
-        <p class="sub-title">
-          Quản lý sản phẩm cửa hàng nhanh chóng và dễ dàng
-        </p>
+        <p>Quản lý sản phẩm - đơn hàng - doanh thu</p>
+
+      </div>
+
+      <div class="topbar-right">
+
+        <!-- SEARCH -->
+
+        <div class="top-search">
+
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input type="text" placeholder="Tìm kiếm...">
+
+        </div>
+
+        <!-- USER -->
+
+        <div class="admin-user">
+
+          <img src="anh1.jpg">
+
+          <div>
+
+            <h3>Nguyễn Tấn Đạt</h3>
+
+            <span>Administrator</span>
+
+          </div>
+
+        </div>
 
       </div>
 
     </div>
 
-    <!-- FORM -->
+    <!-- ===================================================== -->
+    <!-- DASHBOARD -->
+    <!-- ===================================================== -->
 
-    <div class="admin-form">
+    <div class="dashboard-cards">
 
-      <!-- PRODUCT NAME -->
+      <!-- CARD -->
 
-      <input
-        type="text"
-        id="name"
-        placeholder="Nhập tên sản phẩm..."
-      >
+      <div class="dash-card green-glow">
 
-      <!-- PRODUCT PRICE -->
+        <div>
 
-      <input
-        type="number"
-        id="price"
-        placeholder="Nhập giá sản phẩm..."
-      >
+          <h3>Tổng sản phẩm</h3>
 
-      <!-- IMAGE UPLOAD -->
+          <h2 id="totalProducts">0</h2>
 
-      <div class="upload-box">
+          <span>+12% tháng này</span>
 
-        <label for="image">
+        </div>
 
-          <i class="fa-solid fa-image"></i>
-
-          Chọn ảnh sản phẩm
-
-        </label>
-
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-        >
+        <div class="card-icon green">
+          <i class="fa-solid fa-box"></i>
+        </div>
 
       </div>
 
-      <!-- ADD BUTTON -->
+      <!-- CARD -->
 
-      <button onclick="addProduct()">
+      <div class="dash-card blue-glow">
+
+        <div>
+
+          <h3>Đơn hàng</h3>
+
+          <h2 id="totalOrders">0</h2>
+
+          <span>+8% hôm nay</span>
+
+        </div>
+
+        <div class="card-icon blue">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="dash-card orange-glow">
+
+        <div>
+
+          <h3>Khách hàng</h3>
+
+          <h2 id="totalCustomers">0</h2>
+
+          <span>Khách hoạt động</span>
+
+        </div>
+
+        <div class="card-icon orange">
+          <i class="fa-solid fa-users"></i>
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="dash-card purple-glow">
+
+        <div>
+
+          <h3>Doanh thu</h3>
+
+          <h2 id="totalRevenue">0đ</h2>
+
+          <span>Tổng doanh thu</span>
+
+        </div>
+
+        <div class="card-icon purple">
+          <i class="fa-solid fa-sack-dollar"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- STATUS -->
+    <!-- ===================================================== -->
+
+    <div class="stats-box">
+
+      <div class="stat-card green-bg">
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <div>
+
+          <h3>Hoàn thành</h3>
+
+          <p id="doneOrders">0</p>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card yellow-bg">
+
+        <i class="fa-solid fa-clock"></i>
+
+        <div>
+
+          <h3>Đang xử lý</h3>
+
+          <p id="pendingOrders">0</p>
+
+        </div>
+
+      </div>
+
+      <div class="stat-card red-bg">
+
+        <i class="fa-solid fa-ban"></i>
+
+        <div>
+
+          <h3>Đã hủy</h3>
+
+          <p id="cancelOrders">0</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- BUTTONS -->
+    <!-- ===================================================== -->
+
+    <div class="action-buttons">
+
+      <button class="add-btn" onclick="scrollToForm()">
 
         <i class="fa-solid fa-plus"></i>
 
@@ -95,39 +315,241 @@
 
       </button>
 
-    </div>
+      <button class="add-btn secondary-btn" onclick="exportOrders()">
 
-    <!-- PREVIEW IMAGE -->
+        <i class="fa-solid fa-file-excel"></i>
 
-    <div class="preview-container">
+        Xuất Excel
 
-      <img
-        id="previewImage"
-        src=""
-        alt="Preview"
-      >
+      </button>
 
     </div>
 
-    <!-- PRODUCT LIST -->
+    <!-- ===================================================== -->
+    <!-- FORM -->
+    <!-- ===================================================== -->
 
-    <div
-      id="adminProducts"
-      class="products-grid"
-    >
+    <div class="admin-form" id="productForm">
 
-      <p class="empty-text">
-        Chưa có sản phẩm nào
-      </p>
+      <div class="form-title">
+
+        <h2>Thêm / Sửa sản phẩm</h2>
+
+        <p>Quản lý dữ liệu sản phẩm nhanh chóng</p>
+
+      </div>
+
+      <div class="form-grid">
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+          <label>Tên sản phẩm</label>
+
+          <input
+            type="text"
+            id="name"
+            placeholder="Nhập tên sản phẩm..."
+          />
+
+        </div>
+
+        <!-- PRICE -->
+
+        <div class="form-group">
+
+          <label>Giá sản phẩm</label>
+
+          <input
+            type="number"
+            id="price"
+            placeholder="Ví dụ: 350000"
+          />
+
+        </div>
+
+        <!-- CATEGORY -->
+
+        <div class="form-group">
+
+          <label>Danh mục</label>
+
+          <select id="category">
+
+            <option value="">-- Chọn loại --</option>
+
+            <option value="Gạo ST25">Gạo ST25</option>
+
+            <option value="Gạo thơm">Gạo thơm</option>
+
+            <option value="Gạo nếp">Gạo nếp</option>
+
+            <option value="Gạo tấm">Gạo tấm</option>
+
+          </select>
+
+        </div>
+
+        <!-- IMAGE -->
+
+        <div class="form-group full-width">
+
+          <label>Hình ảnh sản phẩm</label>
+
+          <div class="upload-box">
+
+            <label for="image">
+
+              <i class="fa-solid fa-image"></i>
+
+              Chọn ảnh sản phẩm
+
+            </label>
+
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+            />
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PREVIEW -->
+
+      <div class="preview-container">
+
+        <img
+          id="previewImage"
+          src=""
+          alt="Preview"
+          style="display:none;"
+        />
+
+      </div>
+
+      <!-- BUTTON -->
+
+      <div style="margin-top:30px;">
+
+        <button class="submit-btn" onclick="addProduct()">
+
+          <i class="fa-solid fa-floppy-disk"></i>
+
+          Lưu sản phẩm
+
+        </button>
+
+      </div>
 
     </div>
 
-  </div>
+    <!-- ===================================================== -->
+    <!-- PRODUCTS -->
+    <!-- ===================================================== -->
 
-  <!-- JAVASCRIPT -->
+    <div class="products-section">
 
-  <script src="admin.js"></script>
+      <div class="section-header">
+
+        <div>
+
+          <h2>Danh sách sản phẩm</h2>
+
+          <p>Quản lý toàn bộ sản phẩm cửa hàng</p>
+
+        </div>
+
+        <input
+          type="text"
+          id="searchProduct"
+          placeholder="Tìm sản phẩm..."
+          class="search-input"
+          onkeyup="searchProducts()"
+        />
+
+      </div>
+
+      <div id="adminProducts" class="products-grid">
+
+        <p class="empty-text">
+          Chưa có sản phẩm nào
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ORDERS -->
+    <!-- ===================================================== -->
+
+    <div class="orders-section">
+
+      <div class="section-header">
+
+        <div>
+
+          <h2>Quản lý đơn hàng</h2>
+
+          <p>Theo dõi đơn hàng khách hàng</p>
+
+        </div>
+
+      </div>
+
+      <div id="adminOrders"></div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- XLSX -->
+<!-- ===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- ===================================================== -->
+<!-- MENU -->
+<!-- ===================================================== -->
+
+<script>
+
+function toggleSidebar(){
+
+  document
+  .getElementById("sidebar")
+  .classList.toggle("show");
+
+}
+
+</script>
+
+<!-- ===================================================== -->
+<!-- MUSIC -->
+<!-- ===================================================== -->
+
+<audio id="adminMusic" loop autoplay>
+  <source src="vo.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic()">
+  <i class="fa-solid fa-music"></i>
+</button>
+
+<!-- ===================================================== -->
+<!-- JS -->
+<!-- ===================================================== -->
+
+<script type="module" src="admin.js"></script>
 
 </body>
-
 </html>
+```
