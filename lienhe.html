@@ -1,835 +1,1067 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
 
-  <title>
-    Liên hệ - Gạo Hòa Nghĩa
-  </title>
+<title>Liên hệ - Gạo Hòa Nghĩa</title>
 
-  <!-- FONT AWESOME -->
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  >
+<style>
 
-  <!-- CSS -->
+:root{
+--main:#00e5ff;
+--main2:#b100ff;
+--bg:#020617;
+--card:#071427;
+--text:#ffffff;
+--gray:#94a3b8;
+}
 
-  <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+body{
 
-    body{
-      font-family:"Segoe UI",sans-serif;
-      background:#020617;
-      color:#fff;
-      overflow-x:hidden;
-    }
+font-family:"Segoe UI",sans-serif;
 
-    a{
-      text-decoration:none;
-    }
+background:
+radial-gradient(circle at top left,#00e5ff10,transparent 30%),
+radial-gradient(circle at bottom right,#a855f710,transparent 30%),
+#020617;
 
-    :root{
-      --main:#00e5ff;
-      --main2:#00bcd4;
-      --dark:#020617;
-      --dark2:#0f172a;
-      --white:#fff;
-      --gray:#94a3b8;
-      --shadow:0 15px 40px rgba(0,0,0,.35);
-      --radius:28px;
-    }
+color:#fff;
 
-    /* =========================================
-    HEADER
-    ========================================= */
+overflow-x:hidden;
 
-    .header{
+}
 
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      z-index:999;
-      backdrop-filter:blur(12px);
-      background:rgba(2,6,23,.8);
-      border-bottom:1px solid rgba(255,255,255,.08);
+/* =========================================
+MAIN FRAME
+========================================= */
 
-    }
+.page-frame{
 
-    .nav{
+width:min(96%,1850px);
 
-      width:90%;
-      max-width:1400px;
-      margin:auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 0;
+margin:20px auto;
 
-    }
+border-radius:28px;
 
-    .logo{
+overflow:hidden;
 
-      display:flex;
-      align-items:center;
-      gap:14px;
+border:2px solid transparent;
 
-    }
+background:
+linear-gradient(#020617,#020617) padding-box,
 
-    .logo i{
+linear-gradient(
+90deg,
+#00e5ff,
+#4f46e5,
+#ff00ff
+) border-box;
 
-      font-size:38px;
-      color:var(--main);
+box-shadow:
+0 0 25px rgba(0,229,255,.25),
+0 0 50px rgba(168,85,247,.15);
 
-    }
+}
 
-    .logo h2{
+/* =========================================
+HEADER
+========================================= */
 
-      font-size:32px;
+.header{
 
-    }
+background:rgba(2,6,23,.92);
 
-    .logo span{
+backdrop-filter:blur(12px);
 
-      color:#94a3b8;
-      font-size:14px;
+border-bottom:1px solid rgba(255,255,255,.06);
 
-    }
+}
 
-    .nav-links{
+.nav{
 
-      display:flex;
-      gap:35px;
+width:92%;
 
-    }
+margin:auto;
 
-    .nav-links a{
+display:flex;
 
-      color:#fff;
-      font-weight:600;
-      transition:.3s;
+justify-content:space-between;
 
-    }
+align-items:center;
 
-    .nav-links a:hover{
+padding:22px 0;
 
-      color:var(--main);
+}
 
-    }
+.logo{
 
-    /* =========================================
-    HERO
-    ========================================= */
+display:flex;
 
-    .hero{
+align-items:center;
 
-      min-height:70vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:140px 20px 80px;
-      background:
-      linear-gradient(
-        rgba(0,0,0,.7),
-        rgba(0,0,0,.8)
-      ),
-      url("https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=1600")
-      center/cover;
+gap:14px;
 
-    }
+}
 
-    .hero-content h1{
+.logo i{
 
-      font-size:80px;
-      margin-bottom:25px;
-      font-weight:900;
-      text-shadow:0 10px 30px rgba(0,0,0,.5);
+font-size:34px;
 
-    }
+color:#00e5ff;
 
-    .hero-content p{
+}
 
-      font-size:24px;
-      color:#cbd5e1;
-      max-width:800px;
-      margin:auto;
-      line-height:1.7;
+.logo h2{
 
-    }
+font-size:34px;
 
-    /* =========================================
-    CONTACT WRAP
-    ========================================= */
+font-weight:900;
 
-    .contact-wrap{
+}
 
-      width:90%;
-      max-width:1400px;
-      margin:auto;
-      margin-top:-80px;
-      position:relative;
-      z-index:5;
+.logo span{
 
-    }
+font-size:13px;
 
-    .contact-grid{
+color:#94a3b8;
 
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:35px;
+}
 
-    }
+.nav-links{
 
-    /* =========================================
-    FORM
-    ========================================= */
+display:flex;
 
-    .contact-form{
+gap:34px;
 
-      background:#0f172a;
-      padding:45px;
-      border-radius:30px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,.05);
+}
 
-    }
+.nav-links a{
 
-    .contact-form h2{
+color:#fff;
 
-      font-size:42px;
-      margin-bottom:15px;
+font-weight:700;
 
-    }
+font-size:15px;
 
-    .contact-form p{
+text-decoration:none;
 
-      color:#94a3b8;
-      margin-bottom:35px;
+transition:.25s;
 
-    }
+}
 
-    .form-group{
+.nav-links a:hover{
 
-      margin-bottom:22px;
+color:#00e5ff;
 
-    }
+}
 
-    .form-group label{
+/* =========================================
+HERO
+========================================= */
 
-      display:block;
-      margin-bottom:10px;
-      font-weight:700;
+.hero{
 
-    }
+min-height:540px;
 
-    .form-group input,
-    .form-group textarea{
+display:flex;
 
-      width:100%;
-      padding:18px;
-      border:none;
-      outline:none;
-      border-radius:18px;
-      background:#020617;
-      color:#fff;
-      font-size:15px;
-      border:1px solid rgba(255,255,255,.08);
+justify-content:center;
 
-    }
+align-items:center;
 
-    .form-group textarea{
+text-align:center;
 
-      height:180px;
-      resize:none;
+padding:120px 20px;
 
-    }
+background:
+linear-gradient(
+rgba(0,0,0,.65),
+rgba(0,0,0,.72)
+),
 
-    .submit-btn{
+url("https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=1800")
+center/cover no-repeat;
 
-      width:100%;
-      border:none;
-      padding:18px;
-      border-radius:18px;
-      background:linear-gradient(
-        135deg,
-        var(--main),
-        var(--main2)
-      );
-      color:#fff;
-      font-size:18px;
-      font-weight:800;
-      cursor:pointer;
-      transition:.3s;
+}
 
-    }
+.hero h1{
 
-    .submit-btn:hover{
+font-size:78px;
 
-      transform:translateY(-5px);
+font-weight:900;
 
-    }
+margin-bottom:25px;
 
-    /* =========================================
-    INFO CARD
-    ========================================= */
+text-shadow:0 10px 25px rgba(0,0,0,.45);
 
-    .contact-info{
+}
 
-      display:flex;
-      flex-direction:column;
-      gap:25px;
+.hero p{
 
-    }
+max-width:850px;
 
-    .info-card{
+margin:auto;
 
-      background:#0f172a;
-      padding:30px;
-      border-radius:28px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,.05);
+font-size:22px;
 
-    }
+line-height:1.8;
 
-    .info-card h3{
+color:#d6e1f0;
 
-      font-size:28px;
-      margin-bottom:20px;
+}
 
-    }
+/* =========================================
+CONTACT
+========================================= */
 
-    .info-item{
+.contact-wrap{
 
-      display:flex;
-      gap:15px;
-      margin-bottom:20px;
-      align-items:flex-start;
+width:min(92%,1200px);
 
-    }
+margin:auto;
 
-    .info-item i{
+margin-top:-120px;
 
-      width:50px;
-      height:50px;
-      border-radius:16px;
-      background:linear-gradient(
-        135deg,
-        var(--main),
-        var(--main2)
-      );
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size:20px;
+position:relative;
 
-    }
+z-index:10;
 
-    .info-item h4{
+}
 
-      margin-bottom:6px;
+.contact-grid{
 
-    }
+display:grid;
 
-    .info-item p{
+grid-template-columns:1.2fr .8fr;
 
-      color:#94a3b8;
-      line-height:1.6;
+gap:28px;
 
-    }
+align-items:start;
 
-    /* =========================================
-    MAP
-    ========================================= */
+}
 
-    .map{
+/* =========================================
+FORM
+========================================= */
 
-      width:90%;
-      max-width:1400px;
-      margin:60px auto;
+.contact-form{
 
-    }
+background:#071427;
 
-    .map iframe{
+padding:38px;
 
-      width:100%;
-      height:500px;
-      border:none;
-      border-radius:30px;
-      box-shadow:var(--shadow);
+border-radius:28px;
 
-    }
+border:1px solid rgba(0,229,255,.18);
 
-    /* =========================================
-    FLOAT BUTTONS
-    ========================================= */
+box-shadow:
+0 0 20px rgba(0,229,255,.08),
+0 20px 45px rgba(0,0,0,.45);
 
-    .floating{
+}
 
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      display:flex;
-      flex-direction:column;
-      gap:15px;
-      z-index:999;
+.contact-form h2{
 
-    }
+font-size:44px;
 
-    .floating a{
+margin-bottom:12px;
 
-      width:65px;
-      height:65px;
-      border-radius:50%;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      color:#fff;
-      font-size:28px;
-      box-shadow:0 10px 25px rgba(0,0,0,.4);
-      transition:.3s;
+}
 
-    }
+.contact-form p{
 
-    .floating a:hover{
+color:#94a3b8;
 
-      transform:scale(1.1);
+margin-bottom:32px;
 
-    }
+}
 
-    .zalo{
-      background:#0084ff;
-    }
+.form-group{
 
-    .phone{
-      background:#22c55e;
-    }
+margin-bottom:22px;
 
-    .telegram{
-      background:#229ED9;
-    }
+}
 
-    /* =========================================
-    RESPONSIVE
-    ========================================= */
+.form-group label{
 
-    @media(max-width:992px){
+display:block;
 
-      .contact-grid{
+margin-bottom:10px;
 
-        grid-template-columns:1fr;
+font-weight:700;
 
-      }
+}
 
-      .hero-content h1{
+.form-group input,
+.form-group textarea{
 
-        font-size:52px;
+width:100%;
 
-      }
+padding:18px;
 
-    }
+background:#020817;
 
-    @media(max-width:768px){
+border:1px solid rgba(0,229,255,.16);
 
-      .nav{
+border-radius:18px;
 
-        flex-direction:column;
-        gap:20px;
+color:#fff;
 
-      }
+font-size:15px;
 
-      .nav-links{
+outline:none;
 
-        flex-wrap:wrap;
-        justify-content:center;
+transition:.25s;
 
-      }
+}
 
-      .hero-content h1{
+.form-group input:focus,
+.form-group textarea:focus{
 
-        font-size:42px;
+border-color:#00e5ff;
 
-      }
+box-shadow:
+0 0 0 3px rgba(0,229,255,.12),
+0 0 20px rgba(0,229,255,.12);
 
-      .contact-form{
+}
 
-        padding:30px;
+.form-group textarea{
 
-      }
+height:180px;
 
-    }
+resize:none;
 
-  </style>
+}
+
+.submit-btn{
+
+width:100%;
+
+border:none;
+
+padding:18px;
+
+border-radius:18px;
+
+font-size:18px;
+
+font-weight:800;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+135deg,
+#00e5ff,
+#00bcd4
+);
+
+color:#001018;
+
+box-shadow:
+0 10px 25px rgba(0,229,255,.28);
+
+transition:.25s;
+
+}
+
+.submit-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* =========================================
+INFO
+========================================= */
+
+.contact-info{
+
+display:flex;
+
+flex-direction:column;
+
+gap:24px;
+
+}
+
+.info-card{
+
+background:#071427;
+
+padding:28px;
+
+border-radius:26px;
+
+border:1px solid rgba(168,85,247,.25);
+
+box-shadow:
+0 0 18px rgba(168,85,247,.12);
+
+}
+
+.info-card h3{
+
+font-size:30px;
+
+margin-bottom:22px;
+
+}
+
+.info-item{
+
+display:flex;
+
+gap:15px;
+
+margin-bottom:22px;
+
+}
+
+.info-item i{
+
+width:52px;
+height:52px;
+
+border-radius:16px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+linear-gradient(
+135deg,
+#00e5ff,
+#00bcd4
+);
+
+font-size:20px;
+
+}
+
+.info-item h4{
+
+margin-bottom:6px;
+
+}
+
+.info-item p{
+
+color:#94a3b8;
+
+line-height:1.6;
+
+}
+
+/* =========================================
+MAP
+========================================= */
+
+.map{
+
+width:min(92%,1200px);
+
+margin:45px auto 80px;
+
+}
+
+.map iframe{
+
+width:100%;
+
+height:420px;
+
+border:none;
+
+border-radius:28px;
+
+border:2px solid transparent;
+
+background:
+linear-gradient(#020617,#020617) padding-box,
+
+linear-gradient(
+90deg,
+#00e5ff,
+#ff00ff
+) border-box;
+
+box-shadow:
+0 0 25px rgba(0,229,255,.18);
+
+}
+
+/* =========================================
+FLOATING
+========================================= */
+
+.floating{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:14px;
+
+z-index:999;
+
+}
+
+.floating a{
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:24px;
+
+color:#fff;
+
+text-decoration:none;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.35);
+
+}
+
+.zalo{
+background:#0084ff;
+}
+
+.phone{
+background:#22c55e;
+}
+
+.telegram{
+background:#229ED9;
+}
+
+/* =========================================
+RESPONSIVE
+========================================= */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:58px;
+}
+
+.contact-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.nav{
+flex-direction:column;
+gap:18px;
+}
+
+.nav-links{
+flex-wrap:wrap;
+justify-content:center;
+gap:18px;
+}
+
+.logo h2{
+font-size:24px;
+}
+
+.hero{
+
+min-height:430px;
+
+padding:120px 18px 90px;
+
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.hero p{
+
+font-size:15px;
+
+line-height:1.7;
+
+}
+
+.contact-wrap{
+
+margin-top:-60px;
+
+}
+
+.contact-form{
+
+padding:24px;
+
+border-radius:24px;
+
+}
+
+.contact-form h2{
+font-size:32px;
+}
+
+.info-card{
+
+padding:22px;
+
+border-radius:24px;
+
+}
+
+.map iframe{
+
+height:300px;
+
+border-radius:24px;
+
+}
+
+.floating a{
+
+width:54px;
+height:54px;
+
+font-size:20px;
+
+}
+
+}
+/* =========================
+NET GLOW INSIDE
+========================= */
+
+.contact-form,
+.info-card,
+.map iframe{
+
+  position:relative;
+  overflow:hidden;
+
+  border:1px solid rgba(0,229,255,.25);
+
+  box-shadow:
+  0 0 0 1px rgba(0,229,255,.08),
+  0 0 20px rgba(0,229,255,.10),
+  0 0 45px rgba(124,58,237,.12),
+  inset 0 0 20px rgba(0,229,255,.03);
+
+}
+
+/* line chạy bên trong */
+
+.contact-form::before,
+.info-card::before,
+.map iframe::before{
+
+  content:"";
+  position:absolute;
+  inset:0;
+
+  border-radius:inherit;
+
+  padding:1px;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(0,229,255,.9),
+    rgba(124,58,237,.9)
+  );
+
+  -webkit-mask:
+  linear-gradient(#fff 0 0) content-box,
+  linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+
+  pointer-events:none;
+
+}
+
+/* INPUT NET */
+
+.form-group input,
+.form-group textarea{
+
+  background:#020817;
+
+  border:1px solid rgba(0,229,255,.18);
+
+  box-shadow:
+  inset 0 0 12px rgba(0,229,255,.03),
+  0 0 10px rgba(0,229,255,.05);
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+
+  border-color:#00e5ff;
+
+  box-shadow:
+  0 0 0 2px rgba(0,229,255,.10),
+  0 0 20px rgba(0,229,255,.20),
+  inset 0 0 12px rgba(0,229,255,.06);
+
+}
+
+/* BUTTON NET */
+
+.submit-btn{
+
+  position:relative;
+  overflow:hidden;
+
+  box-shadow:
+  0 0 15px rgba(0,229,255,.25),
+  0 0 35px rgba(0,229,255,.18);
+
+}
+
+.submit-btn:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 0 25px rgba(0,229,255,.45),
+  0 0 55px rgba(124,58,237,.25);
+
+}
+
+/* CARD HOVER */
+
+.contact-form:hover,
+.info-card:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 0 25px rgba(0,229,255,.15),
+  0 0 60px rgba(124,58,237,.18);
+
+  transition:.3s;
+
+}
+</style>
 
 </head>
 
 <body>
 
-<!-- =========================================
-HEADER
-========================================= -->
+<div class="page-frame">
 
 <header class="header">
 
-  <div class="nav">
+<div class="nav">
 
-    <div class="logo">
+<div class="logo">
 
-      <i class="fa-solid fa-wheat-awn"></i>
+<i class="fa-solid fa-wheat-awn"></i>
 
-      <div>
+<div>
 
-        <h2>
-          GẠO HÒA NGHĨA
-        </h2>
+<h2>GẠO HÒA NGHĨA</h2>
 
-        <span>
-          Gạo sạch chất lượng cao
-        </span>
+<span>Gạo sạch chất lượng cao</span>
 
-      </div>
+</div>
 
-    </div>
+</div>
+<div class="nav-links">
 
-    <div class="nav-links">
+<a href="index.html">Trang chủ</a>
 
-      <a href="index.html">
-        Trang chủ
-      </a>
+<a href="index.html#products">Sản phẩm</a>
 
-      <a href="index.html#products">
-        Sản phẩm
-      </a>
+<a href="index.html#commitment">Cam kết</a>
 
-      <a href="#">
-        Cam kết
-      </a>
+<a href="index.html#reviews">Đánh giá</a>
 
-      <a href="#">
-        Đánh giá
-      </a>
+<a href="lienhe.html">Liên hệ</a>
 
-      <a href="contact.html">
-        Liên hệ
-      </a>
+</div>
 
-    </div>
-
-  </div>
+</div>
 
 </header>
 
-<!-- =========================================
-HERO
-========================================= -->
-
 <section class="hero">
 
-  <div class="hero-content">
+<div>
 
-    <h1>
-      LIÊN HỆ ĐẶT GẠO
-    </h1>
+<h1>LIÊN HỆ ĐẶT GẠO</h1>
 
-    <p>
+<p>
 
-      Chúng tôi luôn sẵn sàng hỗ trợ khách hàng
-      24/7 với những sản phẩm gạo sạch,
-      thơm ngon và chất lượng nhất.
+Chúng tôi luôn sẵn sàng hỗ trợ khách hàng
+24/7 với những sản phẩm gạo sạch,
+thơm ngon và chất lượng nhất.
 
-    </p>
+</p>
 
-  </div>
+</div>
 
 </section>
 
-<!-- =========================================
-CONTACT
-========================================= -->
-
 <div class="contact-wrap">
 
-  <div class="contact-grid">
+<div class="contact-grid">
 
-    <!-- FORM -->
+<div class="contact-form">
 
-    <div class="contact-form">
+<h2>Gửi liên hệ</h2>
 
-      <h2>
-        Gửi liên hệ
-      </h2>
+<p>Điền thông tin bên dưới để được hỗ trợ nhanh nhất</p>
 
-      <p>
-        Điền thông tin bên dưới để được hỗ trợ nhanh nhất
-      </p>
+<div class="form-group">
 
-      <div class="form-group">
+<label>Họ và tên</label>
 
-        <label>
-          Họ và tên
-        </label>
-
-        <input
-          type="text"
-          id="name"
-          placeholder="Nhập họ tên..."
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>
-          Số điện thoại
-        </label>
-
-        <input
-          type="text"
-          id="phone"
-          placeholder="Nhập số điện thoại..."
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>
-          Email
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          placeholder="Nhập email..."
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>
-          Nội dung
-        </label>
-
-        <textarea
-          id="message"
-          placeholder="Nhập nội dung..."
-        ></textarea>
-
-      </div>
-
-      <button
-        class="submit-btn"
-        onclick="sendContact()"
-      >
-
-        <i class="fa-solid fa-paper-plane"></i>
-
-        Gửi liên hệ
-
-      </button>
-
-    </div>
-
-    <!-- INFO -->
-
-    <div class="contact-info">
-
-      <div class="info-card">
-
-        <h3>
-          Thông tin liên hệ
-        </h3>
-
-        <div class="info-item">
-
-          <i class="fa-solid fa-phone"></i>
-
-          <div>
-
-            <h4>
-              Hotline
-            </h4>
-
-            <p>
-              0345 085 074
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="info-item">
-
-          <i class="fa-solid fa-location-dot"></i>
-
-          <div>
-
-            <h4>
-              Địa chỉ
-            </h4>
-
-            <p>
-              Văn Giang - Hưng Yên
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="info-item">
-
-          <i class="fa-solid fa-envelope"></i>
-
-          <div>
-
-            <h4>
-              Email
-            </h4>
-
-            <p>
-              gaohoanghia@gmail.com
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="info-card">
-
-        <h3>
-          Hỗ trợ nhanh
-        </h3>
-
-        <p style="line-height:1.8;color:#94a3b8;">
-
-          Chúng tôi hỗ trợ đặt hàng,
-          tư vấn loại gạo phù hợp,
-          báo giá đại lý và giao hàng toàn quốc.
-
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
+<input
+type="text"
+id="name"
+placeholder="Nhập họ tên..."
+>
 
 </div>
 
-<!-- =========================================
-MAP
-========================================= -->
+<div class="form-group">
+
+<label>Số điện thoại</label>
+
+<input
+type="text"
+id="phone"
+placeholder="Nhập số điện thoại..."
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+id="email"
+placeholder="Nhập email..."
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Nội dung</label>
+
+<textarea
+id="message"
+placeholder="Nhập nội dung..."
+></textarea>
+
+</div>
+
+<button
+class="submit-btn"
+onclick="sendContact()"
+>
+
+<i class="fa-solid fa-paper-plane"></i>
+
+Gửi liên hệ
+
+</button>
+
+</div>
+
+<div class="contact-info">
+
+<div class="info-card">
+
+<h3>Thông tin liên hệ</h3>
+
+<div class="info-item">
+
+<i class="fa-solid fa-phone"></i>
+
+<div>
+
+<h4>Hotline</h4>
+
+<p>0345 085 074</p>
+
+</div>
+
+</div>
+
+<div class="info-item">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<div>
+
+<h4>Địa chỉ</h4>
+
+<p>Văn Giang - Hưng Yên</p>
+
+</div>
+
+</div>
+
+<div class="info-item">
+
+<i class="fa-solid fa-envelope"></i>
+
+<div>
+
+<h4>Email</h4>
+
+<p>gaohoanghia@gmail.com</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<h3>Hỗ trợ nhanh</h3>
+
+<p style="line-height:1.8;color:#94a3b8;">
+
+Chúng tôi hỗ trợ đặt hàng,
+tư vấn loại gạo phù hợp,
+báo giá đại lý và giao hàng toàn quốc.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 <div class="map">
 
-  <iframe
-    src="https://www.google.com/maps?q=Văn+Giang+Hưng+Yên&output=embed"
-    loading="lazy"
-  ></iframe>
+<iframe
+src="https://www.google.com/maps?q=Văn+Giang+Hưng+Yên&output=embed"
+loading="lazy"
+></iframe>
 
 </div>
 
-<!-- =========================================
-FLOATING
-========================================= -->
+</div>
 
 <div class="floating">
 
-  <a
-    href="https://zalo.me"
-    target="_blank"
-    class="zalo"
-  >
+<a
+href="https://zalo.me"
+target="_blank"
+class="zalo"
+>
 
-    <i class="fa-solid fa-comment"></i>
+<i class="fa-solid fa-comment"></i>
 
-  </a>
+</a>
 
-  <a
-    href="tel:0345085074"
-    class="phone"
-  >
+<a
+href="tel:0345085074"
+class="phone"
+>
 
-    <i class="fa-solid fa-phone"></i>
+<i class="fa-solid fa-phone"></i>
 
-  </a>
+</a>
 
-  <a
-    href="https://t.me/"
-    target="_blank"
-    class="telegram"
-  >
+<a
+href="https://t.me/"
+target="_blank"
+class="telegram"
+>
 
-    <i class="fa-brands fa-telegram"></i>
+<i class="fa-brands fa-telegram"></i>
 
-  </a>
+</a>
 
 </div>
 
-<!-- =========================================
-SCRIPT
-========================================= -->
-
 <script>
 
-  // =========================================
-  // TELEGRAM
-  // =========================================
+const TOKEN =
+"8290012420:AAEDlZvBKk6y8cNY40qu_frp6ppcy-2atP8";
 
-  const TOKEN =
-  "8290012420:AAEDlZvBKk6y8cNY40qu_frp6ppcy-2atP8";
+const CHAT_ID =
+"7166493375";
 
-  const CHAT_ID =
-  "7166493375";
+async function sendContact(){
 
-  // =========================================
-  // SEND CONTACT
-  // =========================================
+const name =
+document.getElementById("name").value;
 
-  async function sendContact(){
+const phone =
+document.getElementById("phone").value;
 
-    const name =
-    document.getElementById("name").value;
+const email =
+document.getElementById("email").value;
 
-    const phone =
-    document.getElementById("phone").value;
+const message =
+document.getElementById("message").value;
 
-    const email =
-    document.getElementById("email").value;
+if(!name || !phone || !message){
 
-    const message =
-    document.getElementById("message").value;
+alert("Vui lòng nhập đầy đủ");
 
-    if(
-      !name ||
-      !phone ||
-      !message
-    ){
+return;
 
-      alert("Vui lòng nhập đầy đủ");
+}
 
-      return;
-
-    }
-
-    const text = `
+const text = `
 
 📩 LIÊN HỆ MỚI
 
@@ -842,57 +1074,53 @@ SCRIPT
 📝 Nội dung:
 ${message}
 
-    `;
+`;
 
-    try{
+try{
 
-      await fetch(
+await fetch(
 
-        `https://api.telegram.org/bot${TOKEN}/sendMessage`,
+`https://api.telegram.org/bot${TOKEN}/sendMessage`,
 
-        {
+{
 
-          method:"POST",
+method:"POST",
 
-          headers:{
-            "Content-Type":"application/json"
-          },
+headers:{
+"Content-Type":"application/json"
+},
 
-          body:JSON.stringify({
+body:JSON.stringify({
 
-            chat_id:CHAT_ID,
+chat_id:CHAT_ID,
 
-            text:text
+text:text
 
-          })
+})
 
-        }
+}
 
-      );
+);
 
-      alert("Đã gửi liên hệ thành công");
+alert("Đã gửi liên hệ thành công");
 
-      document.getElementById("name").value = "";
+document.getElementById("name").value = "";
+document.getElementById("phone").value = "";
+document.getElementById("email").value = "";
+document.getElementById("message").value = "";
 
-      document.getElementById("phone").value = "";
+}
 
-      document.getElementById("email").value = "";
+catch(error){
 
-      document.getElementById("message").value = "";
+alert("Lỗi gửi liên hệ");
 
-    }
+}
 
-    catch(error){
-
-      console.log(error);
-
-      alert("Lỗi gửi liên hệ");
-
-    }
-
-  }
+}
 
 </script>
 
 </body>
 </html>
+

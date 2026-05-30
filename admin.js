@@ -1,10 +1,8 @@
 // ======================================================
 // FIREBASE IMPORT
 // ======================================================
-
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 import {
   getFirestore,
   collection,
@@ -12,10 +10,10 @@ import {
   addDoc,
   deleteDoc,
   updateDoc,
-  doc
+  doc,
+  onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 // ======================================================
 // FIREBASE CONFIG
 // ======================================================
@@ -908,11 +906,77 @@ window.addEventListener(
 
   }
 );
+// ======================================================
+// REALTIME ORDER NOTIFICATION
+// ======================================================
+function showRealtimeNotification(message){
 
+  const notification =
+  document.createElement("div");
+
+  notification.className =
+  "realtime-notification";
+
+  notification.innerHTML = `
+    <i class="fa-solid fa-bell"></i>
+    <span>${message}</span>
+  `;
+
+  document.body.appendChild(notification);
+
+  setTimeout(()=>{
+    notification.classList.add("show");
+  },100);
+
+  setTimeout(()=>{
+
+    notification.classList.remove("show");
+
+    setTimeout(()=>{
+      notification.remove();
+    },500);
+
+  },5000);
+
+}
+
+let firstLoad = true;
+
+function listenNewOrders(){
+
+  const ordersRef =
+  collection(db,"orders");
+
+  onSnapshot(ordersRef,(snapshot)=>{
+
+    if(firstLoad){
+      firstLoad = false;
+      return;
+    }
+
+    snapshot.docChanges().forEach(change=>{
+
+      if(change.type === "added"){
+
+        const order =
+        change.doc.data();
+
+        showRealtimeNotification(
+          `🛒 Đơn hàng mới từ ${order.customer}`
+        );
+
+      }
+
+    });
+
+  });
+
+}
 // ======================================================
 // START
 // ======================================================
-
 loadProducts();
 
 loadOrders();
+
+listenNewOrders();

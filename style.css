@@ -156,16 +156,27 @@ HEADER
   border-bottom:1px solid rgba(255,255,255,.05);
 
 }
-
 .header-container{
 
-  min-height:90px;
+  height:78px;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  gap:40px;
+  gap:25px;
+
+}
+.header-right{
+
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  flex-shrink:0;
+
+  white-space:nowrap;
 
 }
 /* =================================
@@ -345,18 +356,14 @@ nav a:hover::after{
 /* =========================================================
 RIGHT
 ========================================================= */
+@media(max-width:768px){
 
-.header-right{
-
-  display:flex;
-  align-items:center;
-
-  gap:20px;
-
-  min-width:max-content;
+  .header-right{
+    gap:10px;
+    min-width:auto;
+  }
 
 }
-
 /* =========================
 SEARCH WRAPPER
 ========================= */
@@ -364,8 +371,8 @@ SEARCH WRAPPER
 
     position:relative;
 
-    width:260px;
-    height:58px;
+    width:220px;
+    height:52px;
 
     border-radius:20px;
 
@@ -483,8 +490,8 @@ CART
 
     overflow:hidden;
 
-    width:58px;
-    height:58px;
+    width:46px;
+    height:46px;
 
     border:none;
 
@@ -573,7 +580,6 @@ CART BORDER
 /* =========================================================
 MENU TOGGLE
 ========================================================= */
-
 .menu-toggle{
 
   display:none;
@@ -586,6 +592,9 @@ MENU TOGGLE
   font-size:30px;
 
   cursor:pointer;
+
+  position:relative;
+  z-index:10001;
 
 }
 
@@ -2182,12 +2191,7 @@ TOAST
 /* =========================================================
 MOBILE
 ========================================================= */
-
 @media(max-width:991px){
-
-  .header-container{
-    min-height:80px;
-  }
 
   nav{
 
@@ -2198,13 +2202,19 @@ MOBILE
 
     width:100%;
 
+    height:calc(100vh - 80px);
+
     flex-direction:column;
 
-    background:#0f172a;
+    background:#0f172aee;
 
-    padding:30px;
+    backdrop-filter:blur(20px);
+
+    padding:40px 20px;
 
     transition:.4s;
+
+    z-index:9999;
 
   }
 
@@ -2216,7 +2226,7 @@ MOBILE
     display:block;
   }
 
-  .search-box{
+  .search-wrapper{
     display:none;
   }
 
@@ -2233,6 +2243,7 @@ MOBILE
   }
 
 }
+
 
 @media(max-width:768px){
 
@@ -3260,4 +3271,95 @@ body::before{
     0 0 0 3px rgba(0,229,255,.15),
     0 0 30px rgba(0,229,255,.2);
 
+}
+/* =================================
+MOBILE FIX
+================================= */
+
+@media(max-width:768px){
+
+  .header-container{
+    gap:10px;
+    min-height:75px;
+  }
+
+  .logo i{
+    font-size:28px;
+  }
+
+  .logo-text h2{
+    font-size:20px;
+  }
+
+  .logo-text span{
+    font-size:10px;
+  }
+
+  .search-wrapper{
+    display:none;
+  }
+
+  .cart-btn{
+    width:50px;
+    height:50px;
+    display:flex;
+  }
+
+  .menu-toggle{
+    display:block;
+    position:relative;
+    z-index:10001;
+  }
+
+  nav{
+
+    position:fixed;
+
+    top:75px;
+    left:-100%;
+
+    width:100%;
+    height:100vh;
+
+    background:#07111fee;
+
+    backdrop-filter:blur(20px);
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    padding-top:40px;
+
+    z-index:9999;
+
+    transition:.4s;
+  }
+
+  nav.show{
+    left:0;
+  }
+
+  .hero-content h1{
+    font-size:42px;
+    line-height:1.1;
+  }
+
+  .hero-content h2{
+    font-size:34px;
+  }
+
+}
+.header{
+  overflow:visible;
+}
+
+.header-container{
+  position:relative;
+  z-index:10000;
+}
+
+.cart-btn,
+.menu-toggle{
+  flex-shrink:0;
 }

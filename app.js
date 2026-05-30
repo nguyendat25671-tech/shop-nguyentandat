@@ -4,12 +4,12 @@
 
 import { db }
 from "./firebase.js";
-
 import {
   collection,
   getDocs,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -995,7 +995,73 @@ setInterval(()=>{
   .classList.add("active");
 
 },5000);
+// ======================================================
+// REALTIME NOTIFICATION
+// ======================================================
 
+function showRealtimeNotification(message){
+
+  const notification =
+  document.createElement("div");
+
+  notification.className =
+  "realtime-notification";
+
+  notification.innerHTML = `
+    <i class="fa-solid fa-bell"></i>
+    ${message}
+  `;
+
+  document.body.appendChild(notification);
+
+  setTimeout(()=>{
+    notification.classList.add("show");
+  },100);
+
+  setTimeout(()=>{
+
+    notification.classList.remove("show");
+
+    setTimeout(()=>{
+      notification.remove();
+    },500);
+
+  },5000);
+
+}
+
+let firstLoad = true;
+
+function listenNewOrders(){
+
+  const ordersRef =
+  collection(db,"orders");
+
+  onSnapshot(ordersRef,(snapshot)=>{
+
+    if(firstLoad){
+      firstLoad = false;
+      return;
+    }
+
+    snapshot.docChanges().forEach(change=>{
+
+      if(change.type === "added"){
+
+        const order =
+        change.doc.data();
+
+        showRealtimeNotification(
+          `🛒 Đơn hàng mới từ ${order.customer}`
+        );
+
+      }
+
+    });
+
+  });
+
+}
 // ======================================================
 // GLOBAL
 // ======================================================
@@ -1020,7 +1086,6 @@ window.toggleMenu = toggleMenu;
 // ======================================================
 // START
 // ======================================================
-
 window.addEventListener(
   "load",
   async ()=>{
@@ -1032,6 +1097,8 @@ window.addEventListener(
     updateCart();
 
     setupFilterButtons();
+
+    listenNewOrders(); // thêm dòng này
 
   }
 );
